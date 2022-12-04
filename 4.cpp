@@ -14,7 +14,7 @@ int main()
     while (f >> a >> h >> b >> h >> c >> h >> d) {
         if (a <= d && c <= b) {
             ++overlap;
-            if (a >= c || b >= d) {
+            if ((a >= c && b <= d) || (a <= c && b >= d)) {
                 ++full_overlap;
             }
         }
