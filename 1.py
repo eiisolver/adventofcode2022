@@ -1,4 +1,4 @@
-with open('1_input.txt') as f:
+with open("1_input.txt") as f:
     x = 0
     calories = []
     for line in f.readlines():
