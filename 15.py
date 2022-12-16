@@ -7,25 +7,30 @@ max_y = 0
 row_nr = 2000000
 row = []
 
+
 def dist(x0, y0, x1, y1):
-    return abs(x0-x1) + abs(y0 - y1)
+    return abs(x0 - x1) + abs(y0 - y1)
+
 
 def fill_ix(x, v):
-    row[x-min_x] = v
+    row[x - min_x] = v
+
 
 def fill(x, y, dist):
     if abs(y - row_nr) > dist:
         return
     for i in range(min_x, max_x + 1):
-        d = abs(x-i) + abs(y-row_nr)
+        d = abs(x - i) + abs(y - row_nr)
         if d <= dist:
             fill_ix(i, 1)
+
 
 def x_range(x, y, dist, row):
     dx = dist - abs(y - row)
     if dx < 0:
         return (0, 0)
     return (x - dx, x + dx + 1)
+
 
 # Read input
 sensors = []
@@ -38,12 +43,12 @@ for line in data:
     d = dist(x, y, bx, by)
     max_x = max(max_x, x + d)
     max_y = max(max_y, y + d)
-    min_x = min(min_x, x- d)
+    min_x = min(min_x, x - d)
     min_y = min(min_y, y - d)
     sensors.append([x, y, bx, by, d])
 
 # Part 1: fill row with all sensors' ranges
-row = (1+max_x - min_x) * [0]
+row = (1 + max_x - min_x) * [0]
 for (x, y, _, _, d) in sensors:
     fill(x, y, d)
 # Substract all known beacons
@@ -56,7 +61,7 @@ print("Part 1:", sum(row))
 n = 4000000
 found = False
 
-for row in range(n+1):
+for row in range(n + 1):
     if found:
         break
     col = 0
@@ -71,7 +76,7 @@ for row in range(n+1):
             break
         if col == next_col:
             print("FOUND at x=", col, "y=", row)
-            print("Part 2:", col*n + row)
+            print("Part 2:", col * n + row)
             found = True
             break
         else:
